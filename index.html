@@ -1,630 +1,497 @@
 <!doctype html>
-<html lang="gu" data-theme="light">
+<html lang="gu">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ગુજરાતી માનસિક સ્વાસ્થ્ય સ્વ-મૂલ્યાંકન (WHO-5 આધારિત)</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --paper: #F8F6F1;
-    --surface: #fff;
-    --ink: #1F2E2A;
-    --ink-soft: #4A5F58;
-    --ink-faint: #7C8F88;
-    --rule: #DCE3DF;
-    --rule-strong: #B8C6C0;
-    --moss: #2E7D6B;
-    --moss-soft: #E3F0EC;
-    --haldi: #C8871A;
-    --haldi-soft: #FBF0DC;
-    --kumkum: #A8382C;
-    --kumkum-soft: #F8E8E5;
-    --focus: #12312B;
-    --radius: 8px;
-    --shadow: 0 1px 3px rgba(18,49,43,.06), 0 6px 20px rgba(18,49,43,.05);
-    --maxw: 42rem;
-    --pad: clamp(0.9rem, 4vw, 1.4rem);
-    --safe-top: env(safe-area-inset-top, 0px);
-    --safe-bottom: env(safe-area-inset-bottom, 0px);
-    --safe-left: env(safe-area-inset-left, 0px);
-    --safe-right: env(safe-area-inset-right, 0px);
-  }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>WHO-5 માનસિક સ્વાસ્થ્ય સ્વ-મૂલ્યાંકન (ગુજરાતી)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F7F6F3;
+      --surface: #FFFFFF;
+      --text: #1A2E28;
+      --text-soft: #4A5F58;
+      --text-muted: #6B7C75;
+      --border: #E3E9E6;
+      --primary: #1F6B5C;
+      --primary-soft: #E7F3F0;
+      --accent: #2A9D8F;
+      --warning: #C45C4A;
+      --warning-soft: #FDF1EF;
+      --success: #2E7D5B;
+      --success-soft: #E9F6F0;
+      --mid: #B7791F;
+      --mid-soft: #FBF5E9;
+      --radius: 10px;
+      --shadow: 0 4px 18px rgba(26, 46, 40, 0.06);
+    }
 
-  *, *::before, *::after { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html {
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-  }
+    body {
+      font-family: 'Noto Sans Gujarati', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 1.05rem;
+      min-height: 100dvh;
+    }
 
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Noto Sans Gujarati', system-ui, -apple-system, sans-serif;
-    font-size: clamp(0.95rem, 2.8vw, 1.05rem);
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-    padding-left: var(--safe-left);
-    padding-right: var(--safe-right);
-    min-height: 100dvh;
-    overflow-x: hidden;
-  }
+    .wrap {
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 0 1.15rem;
+    }
 
-  .wrap {
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: 0 var(--pad);
-    width: 100%;
-  }
+    /* Safety Bar */
+    .safety {
+      background: var(--warning);
+      color: white;
+      text-align: center;
+      padding: 0.9rem 1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .safety a {
+      color: white;
+      text-decoration: underline;
+      font-weight: 600;
+    }
 
-  /* Safety bar */
-  .safety-bar {
-    background: var(--kumkum);
-    color: #fff;
-    text-align: center;
-    padding: calc(0.75rem + var(--safe-top)) var(--pad) 0.75rem;
-    font-size: clamp(0.82rem, 2.5vw, 0.92rem);
-    font-weight: 500;
-    line-height: 1.45;
-  }
-  .safety-bar a { color: #fff; text-decoration: underline; }
-  .safety-bar strong { font-weight: 700; }
+    /* Header */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1.6rem 0;
+      margin-bottom: 1.75rem;
+    }
+    header h1 {
+      font-size: clamp(1.3rem, 4.5vw, 1.55rem);
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    header p {
+      color: var(--text-soft);
+      font-size: 0.98rem;
+    }
 
-  header.site-head {
-    border-bottom: 1px solid var(--rule);
-    background: var(--surface);
-    padding: 1.3rem 0;
-    margin-bottom: 1.4rem;
-  }
-  header.site-head h1 {
-    font-size: clamp(1.2rem, 4.5vw, 1.5rem);
-    margin: 0 0 0.25rem;
-    font-weight: 700;
-    line-height: 1.3;
-  }
-  header.site-head p {
-    margin: 0;
-    color: var(--ink-soft);
-    font-size: 0.92rem;
-  }
+    /* Notice */
+    .notice {
+      background: var(--mid-soft);
+      border: 1px solid #F0E2C4;
+      border-left: 4px solid var(--mid);
+      padding: 1.1rem 1.2rem;
+      border-radius: var(--radius);
+      margin-bottom: 1.75rem;
+      font-size: 0.95rem;
+      color: var(--text-soft);
+    }
+    .notice strong { color: var(--text); }
 
-  .notice {
-    border: 1px solid var(--rule);
-    border-left: 4px solid var(--haldi);
-    background: var(--haldi-soft);
-    padding: 0.95rem 1.1rem;
-    border-radius: var(--radius);
-    margin-bottom: 1.35rem;
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-    line-height: 1.55;
-  }
-  .notice strong { color: var(--ink); }
+    /* Intro */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1.75rem;
+    }
+    .card h2 {
+      font-size: 1.22rem;
+      margin-bottom: 0.9rem;
+    }
+    .card ul {
+      margin: 1rem 0 1.5rem 1.25rem;
+      color: var(--text-soft);
+    }
+    .card li { margin-bottom: 0.35rem; }
 
-  .intro-card {
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    padding: clamp(1.15rem, 4vw, 1.7rem);
-    box-shadow: var(--shadow);
-    margin-bottom: 1.6rem;
-  }
-  .intro-card h2 {
-    margin: 0 0 0.85rem;
-    font-size: clamp(1.08rem, 3.6vw, 1.22rem);
-  }
-  .intro-card ul {
-    margin: 0 0 1.15rem;
-    padding-left: 1.2rem;
-    color: var(--ink-soft);
-  }
-  .intro-card li { margin-bottom: 0.3rem; }
+    /* Questions */
+    .q-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow);
+    }
+    .q-title {
+      display: flex;
+      gap: 0.7rem;
+      font-weight: 600;
+      margin-bottom: 1.15rem;
+      line-height: 1.5;
+    }
+    .q-num {
+      background: var(--primary-soft);
+      color: var(--primary);
+      min-width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
 
-  /* Question blocks */
-  .q-block {
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    padding: clamp(1.05rem, 3.5vw, 1.45rem);
-    margin-bottom: 0.95rem;
-    box-shadow: var(--shadow);
-  }
-  .q-title {
-    font-weight: 600;
-    margin: 0 0 0.95rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    font-size: clamp(0.94rem, 2.9vw, 1.04rem);
-    line-height: 1.5;
-  }
-  .q-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 1.65rem;
-    height: 1.65rem;
-    background: var(--moss-soft);
-    color: var(--moss);
-    border-radius: 5px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    flex: none;
-    margin-top: 0.12rem;
-  }
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.55rem;
+    }
+    @media (min-width: 420px) {
+      .options { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 640px) {
+      .options { grid-template-columns: repeat(6, 1fr); }
+    }
 
-  /* ===== Options – the most important responsive part ===== */
-  .options {
-    display: grid;
-    gap: 0.5rem;
-    /* Default: 2 columns on very small phones */
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .opt {
+      border: 1.5px solid #C9D4CF;
+      border-radius: 8px;
+      padding: 0.7rem 0.35rem;
+      text-align: center;
+      font-size: 0.86rem;
+      cursor: pointer;
+      background: var(--bg);
+      min-height: 3.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+      position: relative;
+    }
+    .opt:hover {
+      border-color: var(--primary);
+      background: white;
+    }
+    .opt.selected {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .opt input {
+      position: absolute;
+      opacity: 0;
+    }
 
-  /* 3 columns from ~380px */
-  @media (min-width: 380px) {
-    .options { grid-template-columns: repeat(3, 1fr); }
-  }
+    /* Button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 600;
+      padding: 0.9rem 1.8rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s;
+      min-height: 3.1rem;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover { background: #185A4D; }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #C9D4CF;
+      color: var(--text);
+    }
 
-  /* 6 columns only when there is real space */
-  @media (min-width: 640px) {
-    .options { grid-template-columns: repeat(6, 1fr); }
-  }
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 46, 40, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal {
+      background: white;
+      width: 100%;
+      max-width: 420px;
+      border-radius: 14px;
+      max-height: 90dvh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+    }
+    .modal-header {
+      padding: 1.15rem 1.35rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-header h2 { font-size: 1.18rem; }
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      line-height: 1;
+    }
+    .modal-body {
+      padding: 1.5rem 1.35rem;
+      overflow-y: auto;
+      text-align: center;
+    }
+    .modal-footer {
+      padding: 1rem 1.35rem 1.25rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 0.75rem;
+    }
+    .modal-footer .btn { flex: 1; }
 
-  .opt {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 3.15rem;          /* comfortable touch target */
-    padding: 0.5rem 0.35rem;
-    border: 1.5px solid var(--rule-strong);
-    border-radius: 7px;
-    cursor: pointer;
-    text-align: center;
-    font-size: clamp(0.72rem, 2.4vw, 0.83rem);
-    line-height: 1.35;
-    background: var(--paper);
-    transition: border-color 0.15s, background 0.15s;
-    user-select: none;
-    overflow-wrap: break-word;
-    word-break: break-word;
-  }
-  .opt:hover { border-color: var(--ink-faint); background: #fff; }
-  .opt input { position: absolute; opacity: 0; pointer-events: none; }
-  .opt.selected {
-    border-color: var(--moss);
-    background: var(--moss-soft);
-    font-weight: 600;
-  }
-  .opt input:focus-visible + span {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
-  }
+    .score {
+      font-size: 3.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+      margin: 0.35rem 0;
+    }
+    .band {
+      display: inline-block;
+      padding: 0.4rem 1.15rem;
+      border-radius: 50px;
+      font-weight: 600;
+      margin: 0.9rem 0 0.7rem;
+    }
+    .band.high { background: var(--success-soft); color: var(--success); }
+    .band.mid  { background: var(--mid-soft); color: #92610A; }
+    .band.low  { background: var(--warning-soft); color: var(--warning); }
 
-  /* Buttons */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-family: inherit;
-    font-size: 1rem;
-    font-weight: 600;
-    padding: 0.85rem 1.5rem;
-    border-radius: var(--radius);
-    border: 1.5px solid transparent;
-    cursor: pointer;
-    transition: background 0.15s, box-shadow 0.15s;
-    min-height: 3rem;
-    width: 100%;
-    max-width: 17rem;
-  }
-  .btn-primary {
-    background: var(--ink);
-    color: var(--paper);
-    box-shadow: 0 3px 12px rgba(31,46,42,.22);
-  }
-  .btn-primary:hover { background: #2d4a43; }
-  .btn-outline {
-    background: transparent;
-    color: var(--ink);
-    border-color: var(--rule-strong);
-  }
-  .btn-outline:hover { background: var(--paper); }
+    .helpline {
+      background: var(--warning-soft);
+      border: 1px solid #F0CBC3;
+      border-radius: 10px;
+      padding: 1.15rem;
+      margin-top: 1.3rem;
+      text-align: left;
+    }
+    .helpline h3 {
+      color: var(--warning);
+      margin-bottom: 0.4rem;
+      font-size: 1.05rem;
+    }
+    .helpline-num {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--warning);
+    }
 
-  /* ===== Modal ===== */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(18,49,43,0.55);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: max(0.85rem, var(--safe-top)) max(0.85rem, var(--safe-right))
-             max(0.85rem, var(--safe-bottom)) max(0.85rem, var(--safe-left));
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.25s ease, visibility 0.25s ease;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .modal-overlay.open {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .modal {
-    background: var(--surface);
-    border-radius: 12px;
-    box-shadow: 0 20px 50px rgba(18,49,43,0.25);
-    width: 100%;
-    max-width: 26rem;
-    max-height: min(90dvh, 880px);
-    display: flex;
-    flex-direction: column;
-    transform: translateY(14px) scale(0.97);
-    transition: transform 0.28s ease;
-    overflow: hidden;
-  }
-  .modal-overlay.open .modal { transform: none; }
-
-  .modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.95rem 1.1rem;
-    border-bottom: 1px solid var(--rule);
-    flex-shrink: 0;
-  }
-  .modal-header h2 {
-    margin: 0;
-    font-size: clamp(1.05rem, 3.6vw, 1.18rem);
-    font-weight: 700;
-  }
-  .modal-close {
-    background: none;
-    border: none;
-    font-size: 1.65rem;
-    line-height: 1;
-    color: var(--ink-faint);
-    cursor: pointer;
-    padding: 0.3rem 0.55rem;
-    border-radius: 6px;
-    min-width: 2.7rem;
-    min-height: 2.7rem;
-  }
-  .modal-close:hover { background: var(--paper); color: var(--ink); }
-
-  .modal-body {
-    padding: 1.2rem 1.1rem;
-    text-align: center;
-    overflow-y: auto;
-    flex: 1;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .modal-footer {
-    padding: 0.85rem 1.1rem calc(0.95rem + var(--safe-bottom));
-    display: flex;
-    gap: 0.6rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    border-top: 1px solid var(--rule);
-    flex-shrink: 0;
-  }
-  .modal-footer .btn {
-    width: auto;
-    flex: 1 1 auto;
-    min-width: 7.2rem;
-    max-width: none;
-  }
-
-  .score-big {
-    font-size: clamp(2.5rem, 11vw, 3.4rem);
-    font-weight: 700;
-    line-height: 1;
-    color: var(--moss);
-    margin: 0.3rem 0;
-    font-variant-numeric: tabular-nums;
-  }
-  .score-den {
-    font-size: 0.95rem;
-    color: var(--ink-faint);
-    font-weight: 500;
-  }
-  .band-label {
-    display: inline-block;
-    padding: 0.38rem 1.05rem;
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: clamp(0.86rem, 2.7vw, 0.96rem);
-    margin-top: 0.85rem;
-  }
-  .band-label.high { background: #DCFCE7; color: #166534; }
-  .band-label.mid  { background: var(--haldi-soft); color: #92400E; }
-  .band-label.low  { background: var(--kumkum-soft); color: var(--kumkum); }
-
-  .helpline-block {
-    border: 1px solid var(--kumkum);
-    background: var(--kumkum-soft);
-    border-radius: var(--radius);
-    padding: 1.05rem;
-    margin-top: 1.1rem;
-    text-align: left;
-  }
-  .helpline-block h3 {
-    margin: 0 0 0.5rem;
-    color: var(--kumkum);
-    font-size: 1.02rem;
-  }
-  .helpline-block p {
-    margin: 0 0 0.3rem;
-    color: var(--ink-soft);
-    font-size: 0.88rem;
-  }
-  .helpline-num {
-    font-size: 1.18rem;
-    font-weight: 700;
-    color: var(--kumkum);
-  }
-
-  footer.site-foot {
-    border-top: 1px solid var(--rule);
-    margin-top: 2.4rem;
-    padding: 1.6rem 0 calc(1.6rem + var(--safe-bottom));
-    font-size: 0.82rem;
-    color: var(--ink-faint);
-    text-align: center;
-  }
-  footer.site-foot p { margin: 0.25rem 0; }
-
-  /* Landscape phones – give modal more breathing room */
-  @media (max-height: 500px) and (orientation: landscape) {
-    .modal { max-height: 94dvh; }
-    .modal-body { padding: 0.9rem 1rem; }
-  }
-</style>
+    footer {
+      text-align: center;
+      padding: 2.5rem 0 2rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 2.5rem;
+    }
+  </style>
 </head>
 <body>
 
-<div class="safety-bar" role="alert">
-  <strong>જો તમને તાત્કાલિક મદદની જરૂર હોય:</strong>
-  <a href="tel:14416">Tele-MANAS: 14416</a> પર કૉલ કરો (24/7, ગુજરાતીમાં ઉપલબ્ધ)
+<div class="safety">
+  <strong>તાત્કાલિક મદદ જોઈતી હોય તો:</strong>
+  <a href="tel:14416">Tele-MANAS 14416</a> પર કૉલ કરો (24/7)
 </div>
 
 <div class="wrap">
-  <header class="site-head">
+  <header>
     <h1>માનસિક સ્વાસ્થ્ય સ્વ-મૂલ્યાંકન</h1>
-    <p>WHO-5 સૂચક આધારિત · ગુજરાતી આવૃત્તિ</p>
+    <p>WHO-5 વેલ-બીંગ ઇન્ડેક્સ · ગુજરાતી</p>
   </header>
 
   <div class="notice">
-    <strong>મહત્વપૂર્ણ:</strong> આ સ્વ-મૂલ્યાંકન છે, <strong>નિદાન નથી</strong>. તે તમારી સુખાકારીની સ્થિતિ સમજવામાં મદદ કરે છે. જો પરિણામ ચિંતાજનક લાગે અથવા તમે લાંબા સમયથી મુશ્કેલી અનુભવી રહ્યા હો, તો કૃપા કરીને માનસિક સ્વાસ્થ્ય નિષ્ણાતની સલાહ લો.
+    <strong>મહત્વપૂર્ણ:</strong> આ એક સ્વ-મૂલ્યાંકન છે, <strong>નિદાન નથી</strong>. જો પરિણામ ચિંતાજનક લાગે તો માનસિક સ્વાસ્થ્ય નિષ્ણાતની સલાહ લો.
   </div>
 
-  <div class="intro-card" id="intro-card">
+  <div class="card" id="intro">
     <h2>છેલ્લા બે અઠવાડિયા વિશે વિચારો</h2>
-    <p style="margin:0 0 1rem;color:var(--ink-soft)">
-      નીચેના પાંચ નિવેદનો માટે, છેલ્લા <strong>બે અઠવાડિયા</strong> દરમિયાન તમને કેટલી વાર આ અનુભવ થયો તે પસંદ કરો.
-      કોઈ સાચો કે ખોટો જવાબ નથી.
+    <p style="color:var(--text-soft); margin-bottom:1rem;">
+      નીચેના પાંચ નિવેદનો માટે છેલ્લા <strong>બે અઠવાડિયા</strong> દરમિયાન તમને કેટલી વાર આ અનુભવ થયો તે પસંદ કરો.
     </p>
     <ul>
-      <li>કુલ ૫ પ્રશ્નો, લગભગ ૨ મિનિટનો સમય</li>
-      <li>તમારો ડેટા તમારા બ્રાઉઝરમાં જ રહે છે (સર્વર પર મોકલાતો નથી)</li>
-      <li>આ WHO-5 ના ગુજરાતી અનુવાદ પર આધારિત છે</li>
-      <li>છેલ્લો જવાબ પસંદ કરતાં જ પરિણામ મોડલમાં દેખાશે</li>
+      <li>કુલ ૫ પ્રશ્નો · લગભગ ૨ મિનિટ</li>
+      <li>તમારો ડેટા ફક્ત તમારા ઉપકરણમાં રહે છે</li>
+      <li>છેલ્લો જવાબ પસંદ કરતાં જ પરિણામ દેખાશે</li>
     </ul>
-    <button class="btn btn-primary" id="start-btn" type="button">મૂલ્યાંકન શરૂ કરો</button>
+    <button class="btn btn-primary" id="start">મૂલ્યાંકન શરૂ કરો</button>
   </div>
 
-  <form id="assessment-form" style="display:none" novalidate></form>
+  <form id="form" style="display:none;"></form>
 
-  <footer class="site-foot">
-    <p>આ સાધન WHO-5 વેલ-બીંગ ઇન્ડેક્સ પર આધારિત છે, જેનો વિકાસ WHO દ્વારા થયો છે.</p>
-    <p>ગુજરાતી અનુવાદ: Dalal &amp; Khatri (2022), JCDR.</p>
-    <p>કોઈ પણ માનસિક સ્વાસ્થ્ય નિર્ણય માટે હંમેશા લાયકાત ધરાવતા વ્યાવસાયિકની સલાહ લો.</p>
+  <footer>
+    <p>WHO-5 Well-Being Index પર આધારિત</p>
+    <p style="margin-top:0.3rem;">ગુજરાતી અનુવાદ સંદર્ભ: Dalal & Khatri (2022)</p>
   </footer>
 </div>
 
-<!-- Modal -->
-<div class="modal-overlay" id="result-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+<!-- Result Modal -->
+<div class="modal-overlay" id="modal">
   <div class="modal">
     <div class="modal-header">
-      <h2 id="modal-title">તમારો WHO-5 સ્કોર</h2>
-      <button class="modal-close" id="modal-close" type="button" aria-label="બંધ કરો">×</button>
+      <h2>તમારો WHO-5 સ્કોર</h2>
+      <button class="modal-close" id="close">×</button>
     </div>
-    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-body" id="result"></div>
     <div class="modal-footer">
-      <button class="btn btn-outline" id="modal-close-btn" type="button">બંધ કરો</button>
-      <button class="btn btn-primary" id="restart-btn" type="button">ફરીથી મૂલ્યાંકન કરો</button>
+      <button class="btn btn-outline" id="close2">બંધ કરો</button>
+      <button class="btn btn-primary" id="restart">ફરીથી કરો</button>
     </div>
   </div>
 </div>
 
 <script>
 (function () {
-  'use strict';
-
-  var QUESTIONS = [
-    { id: 'q1', text: 'હું આનંદિત અને સારા મૂડમાં રહ્યો/રહી છું.' },
-    { id: 'q2', text: 'હું શાંત અને હળવાશ અનુભવું છું.' },
-    { id: 'q3', text: 'હું સક્રિય અને ઉત્સાહિત અનુભવું છું.' },
-    { id: 'q4', text: 'હું જાગતી વખતે તાજગી અને આરામ અનુભવું છું.' },
-    { id: 'q5', text: 'મારા રોજિંદા જીવનમાં મને રસ પડતી વસ્તુઓ ભરપૂર છે.' }
+  const QUESTIONS = [
+    { id: 'q1', text: 'હું ખુશ અને સારા મૂડમાં રહ્યો/રહી છું.' },
+    { id: 'q2', text: 'હું શાંત અને આરામદાયક અનુભવ્યો/અનુભવી છું.' },
+    { id: 'q3', text: 'હું સક્રિય અને ઊર્જાવાન અનુભવ્યો/અનુભવી છું.' },
+    { id: 'q4', text: 'હું તાજગીથી અને આરામથી જાગ્યો/જાગી છું.' },
+    { id: 'q5', text: 'મારું રોજિંદું જીવન મને રસ પડતી વસ્તુઓથી ભરેલું રહ્યું છે.' }
   ];
 
-  var OPTIONS = [
+  const OPTIONS = [
     { value: 0, label: 'ક્યારેય નહીં' },
-    { value: 1, label: 'ભાગ્યે જ' },
-    { value: 2, label: 'અડધાથી ઓછા સમય' },
+    { value: 1, label: 'થોડોક સમય' },
+    { value: 2, label: 'અડધાથી ઓછો સમય' },
     { value: 3, label: 'અડધાથી વધુ સમય' },
     { value: 4, label: 'મોટાભાગનો સમય' },
     { value: 5, label: 'હંમેશા' }
   ];
 
-  var GU = ['૦','૧','૨','૩','૪','૫','૬','૭','૮','૯'];
-  function guNum(n) {
-    return String(n).replace(/[0-9]/g, function (d) { return GU[+d]; });
-  }
+  const GU = ['૦','૧','૨','૩','૪','૫','૬','૭','૮','૯'];
+  const gu = n => String(n).replace(/\d/g, d => GU[d]);
 
-  var form = document.getElementById('assessment-form');
-  var introCard = document.getElementById('intro-card');
-  var startBtn = document.getElementById('start-btn');
-  var modal = document.getElementById('result-modal');
-  var modalBody = document.getElementById('modal-body');
-  var resultShown = false;
+  const form = document.getElementById('form');
+  const intro = document.getElementById('intro');
+  const modal = document.getElementById('modal');
+  const resultBox = document.getElementById('result');
+  let finished = false;
 
-  function buildForm() {
-    QUESTIONS.forEach(function (q, idx) {
-      var block = document.createElement('div');
-      block.className = 'q-block';
+  // Build questions
+  QUESTIONS.forEach((q, i) => {
+    const block = document.createElement('div');
+    block.className = 'q-block';
+    block.innerHTML = `
+      <div class="q-title">
+        <span class="q-num">${gu(i + 1)}</span>
+        <span>${q.text}</span>
+      </div>
+      <div class="options"></div>
+    `;
+    const optsDiv = block.querySelector('.options');
 
-      var title = document.createElement('div');
-      title.className = 'q-title';
-      var num = document.createElement('span');
-      num.className = 'q-num';
-      num.textContent = guNum(idx + 1);
-      title.appendChild(num);
-      title.appendChild(document.createTextNode(q.text));
-      block.appendChild(title);
-
-      var opts = document.createElement('div');
-      opts.className = 'options';
-
-      OPTIONS.forEach(function (o) {
-        var label = document.createElement('label');
-        label.className = 'opt';
-
-        var input = document.createElement('input');
-        input.type = 'radio';
-        input.name = q.id;
-        input.value = o.value;
-
-        var span = document.createElement('span');
-        span.textContent = o.label;
-
-        label.appendChild(input);
-        label.appendChild(span);
-
-        input.addEventListener('change', function () {
-          var group = block.querySelectorAll('.opt');
-          for (var i = 0; i < group.length; i++) {
-            group[i].classList.remove('selected');
-          }
-          if (input.checked) label.classList.add('selected');
-          checkAndShowResult();
-        });
-
-        opts.appendChild(label);
+    OPTIONS.forEach(opt => {
+      const label = document.createElement('label');
+      label.className = 'opt';
+      label.innerHTML = `
+        <input type="radio" name="${q.id}" value="${opt.value}">
+        <span>${opt.label}</span>
+      `;
+      label.querySelector('input').addEventListener('change', () => {
+        block.querySelectorAll('.opt').forEach(el => el.classList.remove('selected'));
+        label.classList.add('selected');
+        check();
       });
-
-      block.appendChild(opts);
-      form.appendChild(block);
+      optsDiv.appendChild(label);
     });
-  }
+    form.appendChild(block);
+  });
 
-  function allAnswered() {
-    for (var i = 0; i < QUESTIONS.length; i++) {
-      if (!form.querySelector('input[name="' + QUESTIONS[i].id + '"]:checked')) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  function openModal() {
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    modal.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function showResult() {
-    if (resultShown) return;
-    resultShown = true;
-
-    var answers = {};
-    QUESTIONS.forEach(function (q) {
-      var checked = form.querySelector('input[name="' + q.id + '"]:checked');
-      answers[q.id] = parseInt(checked.value, 10);
-    });
-
-    var rawSum = 0;
-    QUESTIONS.forEach(function (q) { rawSum += answers[q.id]; });
-    var percentage = rawSum * 4;
-
-    var band, bandClass, advice;
-    if (percentage >= 68) {
-      band = 'સારી સુખાકારી';
-      bandClass = 'high';
-      advice = 'તમારું માનસિક સ્વાસ્થ્ય સારું જણાય છે. નિયમિત આરામ, જોડાણ અને સ્વસ્થ જીવનશૈલી જાળવી રાખો.';
-    } else if (percentage >= 50) {
-      band = 'મધ્યમ સુખાકારી';
-      bandClass = 'mid';
-      advice = 'તમારી સુખાકારી મધ્યમ છે. તમારી ઊંઘ, આહાર અને વિરામ પર ધ્યાન આપો. જો આ સ્થિતિ ચાલુ રહે તો કોઈ નિષ્ણાત સાથે વાત કરવાનું વિચારો.';
-    } else {
-      band = 'ઓછી સુખાકારી — વ્યાવસાયિક સહાયનો વિચાર કરો';
-      bandClass = 'low';
-      advice = 'તમારો સ્કોર સૂચવે છે કે તમે અત્યારે મુશ્કેલ સમયમાંથી પસાર થઈ રહ્યા હોઈ શકો છો. આ કોઈ નિદાન નથી, પરંતુ કૃપા કરીને નીચે આપેલા હેલ્પલાઇન નંબર પર વાત કરવાનું અથવા માનસિક સ્વાસ્થ્ય નિષ્ણાતની સલાહ લેવાનું ગંભીરતાથી વિચારો.';
-    }
-
-    var html =
-      '<div style="font-size:.86rem;color:var(--ink-faint);letter-spacing:.04em">WHO-5 સ્કોર</div>' +
-      '<div class="score-big">' + guNum(percentage) + '</div>' +
-      '<div class="score-den">/ ૧૦૦</div>' +
-      '<div class="band-label ' + bandClass + '">' + band + '</div>' +
-      '<p style="margin:1.1rem 0 0;color:var(--ink-soft);font-size:0.93rem;line-height:1.6">' + advice + '</p>';
-
-    if (percentage < 50) {
-      html +=
-        '<div class="helpline-block">' +
-          '<h3>તાત્કાલિક સહાય ઉપલબ્ધ છે</h3>' +
-          '<p>ભારત સરકારની Tele-MANAS ટોલ-ફ્રી હેલ્પલાઇન 24/7 ઉપલબ્ધ છે, ગુજરાતી ભાષામાં પણ.</p>' +
-          '<p><span class="helpline-num">14416</span> પર કૉલ કરો</p>' +
-          '<p style="margin-top:.5rem;font-size:.8rem">આ સેવા ભારત સરકારના આરોગ્ય અને પરિવાર કલ્યાણ મંત્રાલય દ્વારા સંચાલિત છે.</p>' +
-        '</div>';
-    }
-
-    html +=
-      '<div class="notice" style="margin-top:1.1rem;text-align:left;font-size:.85rem">' +
-        '<strong>યાદ રાખો:</strong> આ સ્કોર એક સ્ક્રીનિંગ સાધનનો છે. તે કોઈ માનસિક વિકારનું નિદાન નથી.' +
-      '</div>';
-
-    modalBody.innerHTML = html;
-    openModal();
-  }
-
-  function checkAndShowResult() {
-    if (allAnswered()) {
+  function check() {
+    const complete = QUESTIONS.every(q => form.querySelector(`input[name="${q.id}"]:checked`));
+    if (complete && !finished) {
+      finished = true;
       setTimeout(showResult, 280);
     }
   }
 
-  document.getElementById('modal-close').addEventListener('click', closeModal);
-  document.getElementById('modal-close-btn').addEventListener('click', closeModal);
-  modal.addEventListener('click', function (e) {
-    if (e.target === modal) closeModal();
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
-  });
-  document.getElementById('restart-btn').addEventListener('click', function () {
-    location.reload();
-  });
+  function showResult() {
+    let raw = 0;
+    QUESTIONS.forEach(q => {
+      raw += Number(form.querySelector(`input[name="${q.id}"]:checked`).value);
+    });
+    const score = raw * 4; // Official WHO-5 formula
 
-  buildForm();
+    let band, cls, advice;
+    if (score >= 68) {
+      band = 'સારી સુખાકારી';
+      cls = 'high';
+      advice = 'તમારું માનસિક સ્વાસ્થ્ય સારું જણાય છે. નિયમિત આરામ, જોડાણ અને સ્વસ્થ જીવનશૈલી જાળવી રાખો.';
+    } else if (score >= 50) {
+      band = 'મધ્યમ સુખાકારી';
+      cls = 'mid';
+      advice = 'તમારી સુખાકારી મધ્યમ છે. ઊંઘ, આહાર અને વિરામ પર ધ્યાન આપો. જરૂર પડે તો નિષ્ણાતની સલાહ લો.';
+    } else {
+      band = 'ઓછી સુખાકારી';
+      cls = 'low';
+      advice = 'તમારો સ્કોર સૂચવે છે કે તમે અત્યારે મુશ્કેલ સમયમાંથી પસાર થઈ રહ્યા હોઈ શકો છો. કૃપા કરીને વ્યાવસાયિક મદદ લેવાનું વિચારો.';
+    }
 
-  startBtn.addEventListener('click', function () {
-    introCard.style.display = 'none';
+    let html = `
+      <div style="font-size:0.9rem; color:var(--text-muted);">WHO-5 સ્કોર</div>
+      <div class="score">${gu(score)}</div>
+      <div style="color:var(--text-muted); margin-bottom:0.3rem;">/ ૧૦૦</div>
+      <div class="band ${cls}">${band}</div>
+      <p style="color:var(--text-soft);">${advice}</p>
+    `;
+
+    if (score < 50) {
+      html += `
+        <div class="helpline">
+          <h3>તાત્કાલિક સહાય ઉપલબ્ધ છે</h3>
+          <p>ભારત સરકારની Tele-MANAS હેલ્પલાઇન 24/7 ઉપલબ્ધ છે.</p>
+          <p class="helpline-num">14416</p>
+        </div>
+      `;
+    }
+
+    resultBox.innerHTML = html;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Events
+  document.getElementById('start').onclick = () => {
+    intro.style.display = 'none';
     form.style.display = 'block';
-    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
+  };
+
+  const closeModal = () => {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  document.getElementById('close').onclick = closeModal;
+  document.getElementById('close2').onclick = closeModal;
+  document.getElementById('restart').onclick = () => location.reload();
+
+  modal.onclick = e => {
+    if (e.target === modal) closeModal();
+  };
 })();
 </script>
 </body>
