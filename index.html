@@ -2,120 +2,390 @@
 <html lang="gu" data-theme="light">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ગુજરાતી માનસિક સ્વાસ્થ્ય સ્વ-મૂલ્યાંકન (WHO-5 આધારિત)</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --paper:#F8F6F1; --surface:#fff; --ink:#1F2E2A; --ink-soft:#4A5F58; --ink-faint:#7C8F88;
-    --rule:#DCE3DF; --rule-strong:#B8C6C0; --moss:#2E7D6B; --moss-soft:#E3F0EC;
-    --haldi:#C8871A; --haldi-soft:#FBF0DC; --kumkum:#A8382C; --kumkum-soft:#F8E8E5;
-    --focus:#12312B; --radius:6px;
-    --shadow:0 1px 3px rgba(18,49,43,.06),0 6px 20px rgba(18,49,43,.05);
-    --maxw:44rem;
+  :root {
+    --paper: #F8F6F1;
+    --surface: #fff;
+    --ink: #1F2E2A;
+    --ink-soft: #4A5F58;
+    --ink-faint: #7C8F88;
+    --rule: #DCE3DF;
+    --rule-strong: #B8C6C0;
+    --moss: #2E7D6B;
+    --moss-soft: #E3F0EC;
+    --haldi: #C8871A;
+    --haldi-soft: #FBF0DC;
+    --kumkum: #A8382C;
+    --kumkum-soft: #F8E8E5;
+    --focus: #12312B;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(18,49,43,.06), 0 6px 20px rgba(18,49,43,.05);
+    --maxw: 42rem;
+    --pad: clamp(0.9rem, 4vw, 1.4rem);
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
   }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--paper);color:var(--ink);
-       font-family:'Noto Sans Gujarati',system-ui,sans-serif;font-size:1rem;line-height:1.7;
-       -webkit-font-smoothing:antialiased}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 1.25rem}
 
-  .safety-bar{background:var(--kumkum);color:#fff;text-align:center;padding:.75rem 1rem;
-              font-size:.9rem;font-weight:500}
-  .safety-bar a{color:#fff;text-decoration:underline}
-  .safety-bar strong{font-weight:700}
+  *, *::before, *::after { box-sizing: border-box; }
 
-  header.site-head{border-bottom:1px solid var(--rule);background:var(--surface);
-                   padding:1.5rem 0;margin-bottom:2rem}
-  header.site-head h1{font-size:1.5rem;margin:0 0 .35rem;font-weight:700}
-  header.site-head p{margin:0;color:var(--ink-soft);font-size:.95rem}
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
 
-  .notice{border:1px solid var(--rule);border-left:4px solid var(--haldi);
-          background:var(--haldi-soft);padding:1rem 1.25rem;border-radius:var(--radius);
-          margin-bottom:1.75rem;font-size:.92rem;color:var(--ink-soft)}
-  .notice strong{color:var(--ink)}
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Sans Gujarati', system-ui, -apple-system, sans-serif;
+    font-size: clamp(0.95rem, 2.8vw, 1.05rem);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    padding-left: var(--safe-left);
+    padding-right: var(--safe-right);
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
 
-  .intro-card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
-              padding:1.75rem;box-shadow:var(--shadow);margin-bottom:2rem}
-  .intro-card h2{margin:0 0 1rem;font-size:1.2rem}
-  .intro-card ul{margin:0 0 1.25rem;padding-left:1.25rem;color:var(--ink-soft)}
-  .intro-card li{margin-bottom:.35rem}
+  .wrap {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 var(--pad);
+    width: 100%;
+  }
 
-  .q-block{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
-           padding:1.5rem;margin-bottom:1rem;box-shadow:var(--shadow)}
-  .q-title{font-weight:600;margin:0 0 1rem;display:flex;align-items:baseline;gap:.5rem;
-           font-size:1rem;line-height:1.5}
-  .q-num{display:inline-flex;align-items:center;justify-content:center;min-width:1.75rem;
-         height:1.75rem;background:var(--moss-soft);color:var(--moss);border-radius:4px;
-         font-size:.8rem;font-weight:700;flex:none}
-  .options{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
-  @media (min-width:640px){.options{grid-template-columns:repeat(6,1fr)}}
-  .opt{position:relative;display:flex;align-items:center;justify-content:center;
-       padding:.7rem .25rem;border:1.5px solid var(--rule-strong);border-radius:4px;
-       cursor:pointer;text-align:center;font-size:.82rem;line-height:1.4;
-       background:var(--paper);transition:border-color .15s,background .15s;user-select:none}
-  .opt:hover{border-color:var(--ink-faint);background:#fff}
-  .opt input{position:absolute;opacity:0;pointer-events:none}
-  .opt.selected{border-color:var(--moss);background:var(--moss-soft);font-weight:600}
-  .opt input:focus-visible + span{outline:2px solid var(--focus);outline-offset:2px}
+  /* Safety bar */
+  .safety-bar {
+    background: var(--kumkum);
+    color: #fff;
+    text-align: center;
+    padding: calc(0.75rem + var(--safe-top)) var(--pad) 0.75rem;
+    font-size: clamp(0.82rem, 2.5vw, 0.92rem);
+    font-weight: 500;
+    line-height: 1.45;
+  }
+  .safety-bar a { color: #fff; text-decoration: underline; }
+  .safety-bar strong { font-weight: 700; }
 
-  .btn{display:inline-flex;align-items:center;justify-content:center;font-family:inherit;
-       font-size:1rem;font-weight:600;padding:.85rem 2rem;border-radius:var(--radius);
-       border:1.5px solid transparent;cursor:pointer;transition:background .15s,box-shadow .15s}
-  .btn-primary{background:var(--ink);color:var(--paper);box-shadow:0 3px 12px rgba(31,46,42,.25)}
-  .btn-primary:hover{background:#2d4a43}
-  .btn-outline{background:transparent;color:var(--ink);border-color:var(--rule-strong)}
-  .btn-outline:hover{background:var(--paper)}
+  header.site-head {
+    border-bottom: 1px solid var(--rule);
+    background: var(--surface);
+    padding: 1.3rem 0;
+    margin-bottom: 1.4rem;
+  }
+  header.site-head h1 {
+    font-size: clamp(1.2rem, 4.5vw, 1.5rem);
+    margin: 0 0 0.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  header.site-head p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+  }
+
+  .notice {
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--haldi);
+    background: var(--haldi-soft);
+    padding: 0.95rem 1.1rem;
+    border-radius: var(--radius);
+    margin-bottom: 1.35rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .notice strong { color: var(--ink); }
+
+  .intro-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: clamp(1.15rem, 4vw, 1.7rem);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.6rem;
+  }
+  .intro-card h2 {
+    margin: 0 0 0.85rem;
+    font-size: clamp(1.08rem, 3.6vw, 1.22rem);
+  }
+  .intro-card ul {
+    margin: 0 0 1.15rem;
+    padding-left: 1.2rem;
+    color: var(--ink-soft);
+  }
+  .intro-card li { margin-bottom: 0.3rem; }
+
+  /* Question blocks */
+  .q-block {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: clamp(1.05rem, 3.5vw, 1.45rem);
+    margin-bottom: 0.95rem;
+    box-shadow: var(--shadow);
+  }
+  .q-title {
+    font-weight: 600;
+    margin: 0 0 0.95rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: clamp(0.94rem, 2.9vw, 1.04rem);
+    line-height: 1.5;
+  }
+  .q-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.65rem;
+    height: 1.65rem;
+    background: var(--moss-soft);
+    color: var(--moss);
+    border-radius: 5px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    flex: none;
+    margin-top: 0.12rem;
+  }
+
+  /* ===== Options – the most important responsive part ===== */
+  .options {
+    display: grid;
+    gap: 0.5rem;
+    /* Default: 2 columns on very small phones */
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 3 columns from ~380px */
+  @media (min-width: 380px) {
+    .options { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* 6 columns only when there is real space */
+  @media (min-width: 640px) {
+    .options { grid-template-columns: repeat(6, 1fr); }
+  }
+
+  .opt {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.15rem;          /* comfortable touch target */
+    padding: 0.5rem 0.35rem;
+    border: 1.5px solid var(--rule-strong);
+    border-radius: 7px;
+    cursor: pointer;
+    text-align: center;
+    font-size: clamp(0.72rem, 2.4vw, 0.83rem);
+    line-height: 1.35;
+    background: var(--paper);
+    transition: border-color 0.15s, background 0.15s;
+    user-select: none;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  .opt:hover { border-color: var(--ink-faint); background: #fff; }
+  .opt input { position: absolute; opacity: 0; pointer-events: none; }
+  .opt.selected {
+    border-color: var(--moss);
+    background: var(--moss-soft);
+    font-weight: 600;
+  }
+  .opt input:focus-visible + span {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.85rem 1.5rem;
+    border-radius: var(--radius);
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: background 0.15s, box-shadow 0.15s;
+    min-height: 3rem;
+    width: 100%;
+    max-width: 17rem;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: 0 3px 12px rgba(31,46,42,.22);
+  }
+  .btn-primary:hover { background: #2d4a43; }
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--rule-strong);
+  }
+  .btn-outline:hover { background: var(--paper); }
 
   /* ===== Modal ===== */
-  .modal-overlay{
-    position:fixed;inset:0;background:rgba(18,49,43,.55);
-    display:flex;align-items:center;justify-content:center;
-    padding:1.25rem;z-index:1000;opacity:0;visibility:hidden;
-    transition:opacity .25s ease,visibility .25s ease;
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(18,49,43,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: max(0.85rem, var(--safe-top)) max(0.85rem, var(--safe-right))
+             max(0.85rem, var(--safe-bottom)) max(0.85rem, var(--safe-left));
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
-  .modal-overlay.open{opacity:1;visibility:visible}
-  .modal{
-    background:var(--surface);border-radius:10px;box-shadow:0 20px 50px rgba(18,49,43,.25);
-    width:100%;max-width:28rem;max-height:90vh;overflow-y:auto;
-    transform:translateY(18px) scale(.97);transition:transform .28s ease;
-    position:relative;
-  }
-  .modal-overlay.open .modal{transform:none}
-  .modal-header{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:1.1rem 1.4rem;border-bottom:1px solid var(--rule);
-  }
-  .modal-header h2{margin:0;font-size:1.15rem;font-weight:700}
-  .modal-close{
-    background:none;border:none;font-size:1.6rem;line-height:1;
-    color:var(--ink-faint);cursor:pointer;padding:.2rem .45rem;border-radius:4px;
-  }
-  .modal-close:hover{background:var(--paper);color:var(--ink)}
-  .modal-body{padding:1.5rem 1.4rem 1.75rem;text-align:center}
-  .modal-footer{
-    padding:0 1.4rem 1.4rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;
+  .modal-overlay.open {
+    opacity: 1;
+    visibility: visible;
   }
 
-  .score-big{font-size:3.4rem;font-weight:700;line-height:1;color:var(--moss);
-             margin:.4rem 0;font-variant-numeric:tabular-nums}
-  .score-den{font-size:1rem;color:var(--ink-faint);font-weight:500}
-  .band-label{display:inline-block;padding:.4rem 1.2rem;border-radius:999px;
-              font-weight:600;font-size:.95rem;margin-top:1rem}
-  .band-label.high{background:#DCFCE7;color:#166534}
-  .band-label.mid{background:var(--haldi-soft);color:#92400E}
-  .band-label.low{background:var(--kumkum-soft);color:var(--kumkum)}
+  .modal {
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(18,49,43,0.25);
+    width: 100%;
+    max-width: 26rem;
+    max-height: min(90dvh, 880px);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(14px) scale(0.97);
+    transition: transform 0.28s ease;
+    overflow: hidden;
+  }
+  .modal-overlay.open .modal { transform: none; }
 
-  .helpline-block{border:1px solid var(--kumkum);background:var(--kumkum-soft);
-                  border-radius:var(--radius);padding:1.25rem;margin-top:1.25rem;text-align:left}
-  .helpline-block h3{margin:0 0 .6rem;color:var(--kumkum);font-size:1.05rem}
-  .helpline-block p{margin:0 0 .4rem;color:var(--ink-soft);font-size:.9rem}
-  .helpline-num{font-size:1.2rem;font-weight:700;color:var(--kumkum);
-                font-variant-numeric:tabular-nums}
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.95rem 1.1rem;
+    border-bottom: 1px solid var(--rule);
+    flex-shrink: 0;
+  }
+  .modal-header h2 {
+    margin: 0;
+    font-size: clamp(1.05rem, 3.6vw, 1.18rem);
+    font-weight: 700;
+  }
+  .modal-close {
+    background: none;
+    border: none;
+    font-size: 1.65rem;
+    line-height: 1;
+    color: var(--ink-faint);
+    cursor: pointer;
+    padding: 0.3rem 0.55rem;
+    border-radius: 6px;
+    min-width: 2.7rem;
+    min-height: 2.7rem;
+  }
+  .modal-close:hover { background: var(--paper); color: var(--ink); }
 
-  footer.site-foot{border-top:1px solid var(--rule);margin-top:3rem;padding:2rem 0;
-                   font-size:.85rem;color:var(--ink-faint);text-align:center}
-  footer.site-foot p{margin:.25rem 0}
+  .modal-body {
+    padding: 1.2rem 1.1rem;
+    text-align: center;
+    overflow-y: auto;
+    flex: 1;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .modal-footer {
+    padding: 0.85rem 1.1rem calc(0.95rem + var(--safe-bottom));
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--rule);
+    flex-shrink: 0;
+  }
+  .modal-footer .btn {
+    width: auto;
+    flex: 1 1 auto;
+    min-width: 7.2rem;
+    max-width: none;
+  }
+
+  .score-big {
+    font-size: clamp(2.5rem, 11vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--moss);
+    margin: 0.3rem 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .score-den {
+    font-size: 0.95rem;
+    color: var(--ink-faint);
+    font-weight: 500;
+  }
+  .band-label {
+    display: inline-block;
+    padding: 0.38rem 1.05rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: clamp(0.86rem, 2.7vw, 0.96rem);
+    margin-top: 0.85rem;
+  }
+  .band-label.high { background: #DCFCE7; color: #166534; }
+  .band-label.mid  { background: var(--haldi-soft); color: #92400E; }
+  .band-label.low  { background: var(--kumkum-soft); color: var(--kumkum); }
+
+  .helpline-block {
+    border: 1px solid var(--kumkum);
+    background: var(--kumkum-soft);
+    border-radius: var(--radius);
+    padding: 1.05rem;
+    margin-top: 1.1rem;
+    text-align: left;
+  }
+  .helpline-block h3 {
+    margin: 0 0 0.5rem;
+    color: var(--kumkum);
+    font-size: 1.02rem;
+  }
+  .helpline-block p {
+    margin: 0 0 0.3rem;
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+  }
+  .helpline-num {
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--kumkum);
+  }
+
+  footer.site-foot {
+    border-top: 1px solid var(--rule);
+    margin-top: 2.4rem;
+    padding: 1.6rem 0 calc(1.6rem + var(--safe-bottom));
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    text-align: center;
+  }
+  footer.site-foot p { margin: 0.25rem 0; }
+
+  /* Landscape phones – give modal more breathing room */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .modal { max-height: 94dvh; }
+    .modal-body { padding: 0.9rem 1rem; }
+  }
 </style>
 </head>
 <body>
@@ -166,9 +436,7 @@
       <h2 id="modal-title">તમારો WHO-5 સ્કોર</h2>
       <button class="modal-close" id="modal-close" type="button" aria-label="બંધ કરો">×</button>
     </div>
-    <div class="modal-body" id="modal-body">
-      <!-- filled by JS -->
-    </div>
+    <div class="modal-body" id="modal-body"></div>
     <div class="modal-footer">
       <button class="btn btn-outline" id="modal-close-btn" type="button">બંધ કરો</button>
       <button class="btn btn-primary" id="restart-btn" type="button">ફરીથી મૂલ્યાંકન કરો</button>
@@ -198,7 +466,9 @@
   ];
 
   var GU = ['૦','૧','૨','૩','૪','૫','૬','૭','૮','૯'];
-  function guNum(n) { return String(n).replace(/[0-9]/g, function (d) { return GU[+d]; }); }
+  function guNum(n) {
+    return String(n).replace(/[0-9]/g, function (d) { return GU[+d]; });
+  }
 
   var form = document.getElementById('assessment-form');
   var introCard = document.getElementById('intro-card');
@@ -258,7 +528,9 @@
 
   function allAnswered() {
     for (var i = 0; i < QUESTIONS.length; i++) {
-      if (!form.querySelector('input[name="' + QUESTIONS[i].id + '"]:checked')) return false;
+      if (!form.querySelector('input[name="' + QUESTIONS[i].id + '"]:checked')) {
+        return false;
+      }
     }
     return true;
   }
@@ -289,22 +561,25 @@
 
     var band, bandClass, advice;
     if (percentage >= 68) {
-      band = 'સારી સુખાકારી'; bandClass = 'high';
+      band = 'સારી સુખાકારી';
+      bandClass = 'high';
       advice = 'તમારું માનસિક સ્વાસ્થ્ય સારું જણાય છે. નિયમિત આરામ, જોડાણ અને સ્વસ્થ જીવનશૈલી જાળવી રાખો.';
     } else if (percentage >= 50) {
-      band = 'મધ્યમ સુખાકારી'; bandClass = 'mid';
+      band = 'મધ્યમ સુખાકારી';
+      bandClass = 'mid';
       advice = 'તમારી સુખાકારી મધ્યમ છે. તમારી ઊંઘ, આહાર અને વિરામ પર ધ્યાન આપો. જો આ સ્થિતિ ચાલુ રહે તો કોઈ નિષ્ણાત સાથે વાત કરવાનું વિચારો.';
     } else {
-      band = 'ઓછી સુખાકારી — વ્યાવસાયિક સહાયનો વિચાર કરો'; bandClass = 'low';
+      band = 'ઓછી સુખાકારી — વ્યાવસાયિક સહાયનો વિચાર કરો';
+      bandClass = 'low';
       advice = 'તમારો સ્કોર સૂચવે છે કે તમે અત્યારે મુશ્કેલ સમયમાંથી પસાર થઈ રહ્યા હોઈ શકો છો. આ કોઈ નિદાન નથી, પરંતુ કૃપા કરીને નીચે આપેલા હેલ્પલાઇન નંબર પર વાત કરવાનું અથવા માનસિક સ્વાસ્થ્ય નિષ્ણાતની સલાહ લેવાનું ગંભીરતાથી વિચારો.';
     }
 
     var html =
-      '<div style="font-size:.88rem;color:var(--ink-faint);letter-spacing:.04em">WHO-5 સ્કોર</div>' +
+      '<div style="font-size:.86rem;color:var(--ink-faint);letter-spacing:.04em">WHO-5 સ્કોર</div>' +
       '<div class="score-big">' + guNum(percentage) + '</div>' +
       '<div class="score-den">/ ૧૦૦</div>' +
       '<div class="band-label ' + bandClass + '">' + band + '</div>' +
-      '<p style="margin:1.2rem 0 0;color:var(--ink-soft);font-size:.95rem;line-height:1.6">' + advice + '</p>';
+      '<p style="margin:1.1rem 0 0;color:var(--ink-soft);font-size:0.93rem;line-height:1.6">' + advice + '</p>';
 
     if (percentage < 50) {
       html +=
@@ -312,12 +587,12 @@
           '<h3>તાત્કાલિક સહાય ઉપલબ્ધ છે</h3>' +
           '<p>ભારત સરકારની Tele-MANAS ટોલ-ફ્રી હેલ્પલાઇન 24/7 ઉપલબ્ધ છે, ગુજરાતી ભાષામાં પણ.</p>' +
           '<p><span class="helpline-num">14416</span> પર કૉલ કરો</p>' +
-          '<p style="margin-top:.6rem;font-size:.82rem">આ સેવા ભારત સરકારના આરોગ્ય અને પરિવાર કલ્યાણ મંત્રાલય દ્વારા સંચાલિત છે.</p>' +
+          '<p style="margin-top:.5rem;font-size:.8rem">આ સેવા ભારત સરકારના આરોગ્ય અને પરિવાર કલ્યાણ મંત્રાલય દ્વારા સંચાલિત છે.</p>' +
         '</div>';
     }
 
     html +=
-      '<div class="notice" style="margin-top:1.25rem;text-align:left;font-size:.88rem">' +
+      '<div class="notice" style="margin-top:1.1rem;text-align:left;font-size:.85rem">' +
         '<strong>યાદ રાખો:</strong> આ સ્કોર એક સ્ક્રીનિંગ સાધનનો છે. તે કોઈ માનસિક વિકારનું નિદાન નથી.' +
       '</div>';
 
@@ -331,7 +606,6 @@
     }
   }
 
-  // Close handlers
   document.getElementById('modal-close').addEventListener('click', closeModal);
   document.getElementById('modal-close-btn').addEventListener('click', closeModal);
   modal.addEventListener('click', function (e) {
@@ -340,7 +614,6 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
   });
-
   document.getElementById('restart-btn').addEventListener('click', function () {
     location.reload();
   });
